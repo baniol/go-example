@@ -16,7 +16,7 @@ var Name string
 // Version of the application
 var Version string
 
-const port = 3000
+var port = os.Getenv("PORT")
 
 // TODO: delay endpoint with delay time passed as a param
 
