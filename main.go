@@ -6,10 +6,19 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
-	"time"
+	"os"
+	// "time"
 )
 
+// Name of the application
+var Name string
+
+// Version of the application
+var Version string
+
 const port = 3000
+
+// TODO: delay endpoint with delay time passed as a param
 
 type User struct {
 	Name  string `json:"username"`
@@ -17,12 +26,21 @@ type User struct {
 }
 
 func main() {
+	checkVersion()
 	http.HandleFunc("/", handlerFunction)
 	http.HandleFunc("/stream", streamHandlerFunction)
 	http.HandleFunc("/user", userHandler)
 	http.HandleFunc("/user-stream", userHandlerStream)
 	log.Printf("Listening on port :%v", port)
 	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%v", port), nil))
+}
+
+func checkVersion() {
+	if len(os.Args) > 1 && os.Args[1] == "version" {
+		version := fmt.Sprintf("version %s", Version)
+		fmt.Println(version)
+		os.Exit(0)
+	}
 }
 
 func handlerFunction(rw http.ResponseWriter, r *http.Request) {
@@ -32,7 +50,7 @@ func handlerFunction(rw http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		log.Fatal(err)
 	}
-	time.Sleep(500 * time.Millisecond)
+	// time.Sleep(500 * time.Millisecond)
 	log.Println("responding ...")
 	rw.Header().Set("Content-Type", "application/json")
 	fmt.Fprintf(rw, string(str))
