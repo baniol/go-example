@@ -6,14 +6,11 @@ VFLAG=-X 'main.Version=$(VERSION) $(COMMIT)' -X 'main.Name=$(NAME)' -w -s
 
 .PHONY: build
 
-run: 
+build: depend
 	go build -ldflags "$(VFLAG)" -o $(NAME)
 
 install: 
 	go install -ldflags "$(VFLAG)"
-
-build: depend
-	GOARCH=amd64 GOOS=linux go build -ldflags=$(VFLAG) -o bin/$(NAME)
 
 depend:
 	go get -v $(DEPEND)
