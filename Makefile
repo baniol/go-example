@@ -5,6 +5,10 @@ COMMIT?=$(shell git rev-parse --short HEAD)
 VFLAG=-X 'main.Version=$(VERSION) $(COMMIT)' -X 'main.Name=$(NAME)' -w -s
 IMAGE=go-example
 
+REGION=eu-central-1
+ACCOUNT=500606609328
+REPOSITORY=go-example
+
 .PHONY: build
 
 depend:
@@ -22,7 +26,12 @@ builddocker:
 	docker run -t $(IMAGE) /bin/true
 	docker cp `docker ps -q -n=1`:/go/src/$(NAME)/main .
 	chmod 755 ./main
-	docker build --rm=true --tag=$(IMAGE) -f Dockerfile.static .
+	docker build --rm=true --tag=$(IMAGE):$(VERSION) -f Dockerfile.static .
 
 test:
 	go test $$(go list ./... | grep -vE "vendor") -v -cover
+
+push:
+	`aws ecr get-login --no-include-email --region $(REGION)`
+	docker tag $(REPOSITORY):$(VERSION) $(ACCOUNT).dkr.ecr.$(REGION).amazonaws.com/$(IMAGE):$(VERSION)
+	docker push $(ACCOUNT).dkr.ecr.$(REGION).amazonaws.com/$(IMAGE):$(VERSION)
