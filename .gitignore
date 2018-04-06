@@ -1,3 +1,5 @@
 vendor
 go-example
 main
+.terraform
+keys

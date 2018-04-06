@@ -80,7 +80,7 @@ resource "aws_codebuild_project" "foo" {
 
   source {
     type     = "GITHUB"
-    location = "https://github.com/mitchellh/packer.git"
+    location = "https://github.com/baniol/go-example.git"
   }
 
   # vpc_config {
