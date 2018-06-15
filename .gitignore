@@ -1,3 +1,6 @@
 vendor
 go-example
 main
+.terraform
+terraform/terraform.tfstate
+terraform/terraform.tfstate.backup

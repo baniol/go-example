@@ -15,7 +15,7 @@ install:
 	go install -ldflags "$(VFLAG)"
 
 buildgo: depend
-	CGO_ENABLED=0 GOOS=linux go build -ldflags "$(VFLAG)" -a -installsuffix cgo -o main /go/src/$(NAME)/main.go
+	CGO_ENABLED=0 GOOS=linux go build -ldflags "$(VFLAG)" -a -installsuffix cgo -o main /go/src/github.com/baniol/$(NAME)/main.go
 
 builddocker:
 	docker build -t $(IMAGE) -f ./Dockerfile.build .
