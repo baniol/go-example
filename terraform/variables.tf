@@ -28,7 +28,7 @@ variable "git_organization" {
 }
 
 variable "git_branch" {
-  default = "terraform"
+  default = "master"
 }
 
 variable "codepipeline_polling" {
