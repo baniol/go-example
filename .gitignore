@@ -4,3 +4,4 @@ main
 .terraform
 terraform/terraform.tfstate
 terraform/terraform.tfstate.backup
+coverage.out
