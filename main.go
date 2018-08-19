@@ -10,6 +10,8 @@ import (
 	// "time"
 )
 
+// test
+
 var Name string
 
 // Version of the application
