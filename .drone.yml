@@ -18,4 +18,12 @@ pipeline:
     commands:
       - go build -v -ldflags "-X main.build=xxx" -a -o release/darwin/amd64/go-example
 
+  ecr:
+    image: plugins/ecr
+    registry: 500606609328.dkr.ecr.eu-central-1.amazonaws.com
+    repo: 500606609328.dkr.ecr.eu-central-1.amazonaws.com/go-example
+    # secrets: [ ecr_access_key, ecr_secret_key ]
+    tags: latest
+    file: Dockerfile
+
 branches: drone
