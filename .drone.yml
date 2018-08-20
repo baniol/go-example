@@ -18,7 +18,7 @@ pipeline:
     commands:
       - go build -v -ldflags "-X main.build=xxx" -a -o release/darwin/amd64/go-example
 
-  build:
+  ecr:
     image: plugins/ecr
     region: eu-central-1
     repo: 500606609328.dkr.ecr.eu-central-1.amazonaws.com/go-example
