@@ -18,12 +18,10 @@ pipeline:
     commands:
       - go build -v -ldflags "-X main.build=xxx" -a -o release/darwin/amd64/go-example
 
-  ecr:
+  build:
     image: plugins/ecr
-    registry: 500606609328.dkr.ecr.eu-central-1.amazonaws.com
+    region: eu-central-1
     repo: 500606609328.dkr.ecr.eu-central-1.amazonaws.com/go-example
-    # secrets: [ ecr_access_key, ecr_secret_key ]
-    tags: latest
-    file: Dockerfile
+    tags: "${DRONE_COMMIT_SHA:0:10}"
 
 branches: drone
