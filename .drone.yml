@@ -3,20 +3,10 @@ workspace:
   path: src/github.com/baniol/go-example
 pipeline:
   test:
-    image: golang:1.9
+    image: golang:1.10
     commands:
       - go vet
       - go test -cover -coverprofile=coverage.out
-
-  # build_osx_amd64:
-  #   image: golang:1.9
-  #   group: build
-  #   environment:
-  #     - GOOS=darwin
-  #     - GOARCH=amd64
-  #     - CGO_ENABLED=0
-  #   commands:
-  #     - go build -v -ldflags "-X main.build=xxx" -a -o release/darwin/amd64/go-example
 
   ecr:
     image: plugins/ecr
